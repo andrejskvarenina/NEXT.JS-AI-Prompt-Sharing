@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { PostType } from "@types"
 import PromptCard from "./prompt-card"
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const PromptCardList = ({data, handleTagClick} : any) => {
   return (
@@ -23,9 +24,35 @@ const PromptCardList = ({data, handleTagClick} : any) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
-  const handleSearchChange = (e : any) => {
+  const [displayedPosts, setDisplayedPosts] = useState([])
 
+  const handleSearchChange = (e : any) => {
+    setSearchText(e.target.value.toLowerCase())
+
+    const filteredPosts = posts.filter((post : PostType ) => {
+      const username = post.creator.username.toLowerCase();
+      const tag = post.tag.toLowerCase();
+      const prompt = post.prompt.toLowerCase();
+      
+      return username.includes(searchText) || tag.includes(searchText) || prompt.includes(searchText);
+    });
+
+    setDisplayedPosts(filteredPosts);
   }
+
+  const handleTagClick = (tag : string) => {
+    setSearchText(tag);
+
+    const filteredPosts = posts.filter((post : PostType ) => {
+        const postTag = post.tag.toLowerCase();
+
+        return postTag.includes(tag.toLowerCase());
+    });
+
+    setDisplayedPosts(filteredPosts);
+}
+
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -33,6 +60,7 @@ const Feed = () => {
       const data = await response.json();
 
       setPosts(data);
+      setDisplayedPosts(data);
     }
 
     fetchPosts();
@@ -40,21 +68,30 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      <div className="relative w-full flex-center">
         <input 
         type="text"
         placeholder="Search for a tag or a username"
         value={searchText}
         onChange={handleSearchChange}
-        required
         className="search_input peer"
         />
-      </form>
+
+        <button 
+          onClick={() => {
+            setSearchText('')
+            setDisplayedPosts(posts)
+          }}
+          className="absolute right-0 top-0 bottom-0 pr-3"
+        >
+          <CloseRoundedIcon />
+        </button>
+      </div>
 
 
     <PromptCardList 
-      data={posts}
-      handleTagClick={() => {}}
+      data={displayedPosts}
+      handleTagClick={handleTagClick}
     />
     </section>
   )

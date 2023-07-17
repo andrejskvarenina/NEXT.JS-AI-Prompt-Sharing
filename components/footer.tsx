@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className="w-full h-auto md:h-52 mt-20 glassmorphism flex flex-col md:flex-row gap-10 md:gap-0 sm:justify-around items-center">
 
       <div className="flex flex-col gap-2">
-      <Link href='/' className="flex gap-2 items-center">
+      <Link href='/' className="flex gap-2 items-center justify-center md:justify-start">
         <Image src='/assets/images/logo.svg' alt="Promptopia Logo" width={40} height={40} className="object-contain hidden sm:flex"/>
         <Image src='/assets/images/logo.svg' alt="Promptopia Logo" width={30} height={30} className="object-contain flex sm:hidden "/>
         <p className="font-satoshi font-semibold text-xl sm:text-3xl text-black tracking-wide">Promptopia</p>
