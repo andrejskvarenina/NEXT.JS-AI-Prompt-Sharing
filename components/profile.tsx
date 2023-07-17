@@ -1,12 +1,12 @@
 import PromptCard from "./prompt-card";
-import { Post } from "@types";
+import { PostType } from "@types";
 
 type Props = {
   name: string;
   desc: string;
-  data: Post[];
-  handleEdit: (post: Post) => void;
-  handleDelete: (post: Post) => Promise<void>;
+  data: PostType[];
+  handleEdit: (post: PostType) => void;
+  handleDelete: (post: PostType) => Promise<void>;
 };
 
 const   Profile = ({name, desc, data, handleEdit, handleDelete }: Props) => {
@@ -19,7 +19,7 @@ const   Profile = ({name, desc, data, handleEdit, handleDelete }: Props) => {
       <p className="desc text_left">{desc}</p>
 
       <div className="mt-10 prompt_layout">
-      {data.map((post : Post ) => {
+      {data.map((post : PostType ) => {
         
         return (
           <PromptCard 
@@ -27,7 +27,6 @@ const   Profile = ({name, desc, data, handleEdit, handleDelete }: Props) => {
             post={post}
             handleEdit={() => handleEdit && handleEdit(post)}
             handleDelete={() => handleDelete && handleDelete(post)} 
-            handleTagClick={undefined}
           />
         )
       })}

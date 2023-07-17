@@ -1,8 +1,25 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google'
 
+import { User as NextAuthUser, Profile as NextAuthProfile, Account as NextAuthAccount } from "next-auth";
+import { AdapterUser as NextAuthAdapterUser } from "next-auth/adapters";
+
 import User from '@models/user'
 import { connectToDB } from "@utils/database";
+
+
+type ExtendedProfile = NextAuthProfile & {
+  name?: string;
+  picture?: string;
+};
+
+type SignInType = {
+  user: NextAuthUser | NextAuthAdapterUser;
+  account: NextAuthAccount | null;
+  profile?: ExtendedProfile;
+  email?: { verificationRequest?: boolean };
+  credentials?: Record<string, any>;
+};
 
 const handler = NextAuth({
   providers: [
@@ -22,7 +39,13 @@ const handler = NextAuth({
 
     return session;
   },
-  async signIn({ profile } : any) {
+  async signIn({ profile } : SignInType ) {
+
+    if (!profile || !profile.name || !profile.picture) {
+      console.log('Profile, name, or picture is not provided');
+      return false;
+    }
+  
     try {
       await connectToDB();
 

@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@components/profile";
 
+import { PostType } from "@types";
+
 
 const MyProfile = () => {
   const router = useRouter();
@@ -24,11 +26,11 @@ const MyProfile = () => {
     if (session?.user.id) fetchPosts();
   }, [session]);
 
-  const handleEdit = (post) => {
+  const handleEdit = (post : PostType) => {
     router.push(`/update-prompt?id=${post._id}`)
   }
 
-  const handleDelete = async (post) => {
+  const handleDelete = async (post: PostType) => {
     const hasConfirmed = confirm("Are you sure you want to delete this prompt?")
 
     if (hasConfirmed) {
@@ -37,7 +39,7 @@ const MyProfile = () => {
           method: 'DELETE'
         });
 
-        const filteredPosts = posts.filter((p) => {
+        const filteredPosts = posts.filter((p : PostType) => {
           p._id !== post._id
         })
 

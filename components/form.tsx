@@ -1,11 +1,12 @@
 import Link from "next/link"
+import { PromptType } from "@types"
 
 type Props = {
   type: string,
-  post: any,
-  setPost: any,
-  submitting: any,
-  handleSubmit: any,
+  post: PromptType,
+  setPost: (updatedPost: PromptType) => void;
+  submitting: boolean,
+  handleSubmit: (e: React.FormEvent) => void,
 }
 
 const Form = ({

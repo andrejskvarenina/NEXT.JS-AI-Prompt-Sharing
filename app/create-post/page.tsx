@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
@@ -16,7 +16,7 @@ const CreatePrompt = () => {
     tag: '',
   });
 
-  const createPrompt = async (e : any) => {
+  const createPrompt = async (e : FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import '@styles/global.css';
 import Nav from '@components/nav';
 import Provider from '@components/provider';
@@ -8,7 +9,7 @@ export const metadata = {
 }
 
 type Props = {
-  children: any;
+  children: ReactNode;
 }
 
 const RootLayout = ({children}: Props) => {

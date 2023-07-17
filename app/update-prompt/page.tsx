@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import Form from '@components/form'
@@ -11,7 +11,6 @@ const EditPrompt = () => {
   
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id');
-  console.log(promptId)
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
@@ -33,7 +32,7 @@ const EditPrompt = () => {
     if (promptId) getPromptDetails();
   }, [promptId]);
 
-  const updatePrompt = async (e : any) => {
+  const updatePrompt = async (e : FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
