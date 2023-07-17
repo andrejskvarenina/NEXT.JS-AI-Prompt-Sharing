@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import '@styles/global.css';
 import Nav from '@components/nav';
 import Provider from '@components/provider';
+import Footer from '@components/footer';
 
 export const metadata = {
   title: "Promptopia",
@@ -25,6 +26,9 @@ const RootLayout = ({children}: Props) => {
             <Nav />
             {children}
           </main>
+
+          <Footer />
+          
         </body>
       </Provider>
     </html>

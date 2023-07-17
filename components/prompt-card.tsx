@@ -68,7 +68,7 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete} : Props) =>
 
       </div>
 
-      <p className="my-4 font-satoshi text-sm text-gray-700">
+      <p className="my-4 font-satoshi text-sm text-gray-700 h-32 overflow-y-scroll">
         {post.prompt}
       </p>
 
@@ -83,14 +83,14 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete} : Props) =>
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p 
             className="font-inter text-sm green_gradient cursor-pointer"
-            onClick={() => handleEdit}
+            onClick={() => handleEdit && handleEdit(post)}
           >
             Edit
           </p>
           
           <p 
             className="font-inter text-sm orange_gradient cursor-pointer"
-            onClick={() => handleDelete}
+            onClick={() => handleDelete && handleDelete(post)}
           >
             Delete
           </p>
