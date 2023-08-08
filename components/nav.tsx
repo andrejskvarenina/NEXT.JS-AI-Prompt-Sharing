@@ -123,14 +123,16 @@ const Nav = () => {
           ) : (
             <>
             {providers && Object.values(providers).map((provider : any) => {
-              <button
+              return (
+                <button
                 type="button"
                 key={provider.name}
                 onClick={() => signIn(provider.id)}
-                className="black_button"
+                className="black_btn"
               >
                 Sign In
               </button>
+              )
             })}
             </>
           )}
