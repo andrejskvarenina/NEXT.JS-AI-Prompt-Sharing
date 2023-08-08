@@ -9,7 +9,7 @@ type Props = {
   handleDelete: (post: PostType) => Promise<void>;
 };
 
-const   Profile = ({name, desc, data, handleEdit, handleDelete }: Props) => {
+const Profile = ({name, desc, data, handleEdit, handleDelete }: Props) => {
 
   return (
     <section className="w-full">
